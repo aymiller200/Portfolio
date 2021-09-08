@@ -1,8 +1,8 @@
 const p1 = document.querySelector('#p1');
 const p2 = document.querySelector('#p2');
 
-const navLink = document.querySelector('#navbarNavDropdown')
-
+const navLink = document.querySelector('#navbarDropdownMenuLink')
+const navList = document.querySelector('#menu')
 const headShot = document.querySelector('#headShot');
 const jobImg = document.querySelector('#jobImg');
 const jobTitle = document.querySelector('#jobTitle');
@@ -12,9 +12,10 @@ const next = document.querySelector('#next')
 const prev = document.querySelector('#prev')
 
 
-next.addEventListener('click', nextJob)
-navLink.style.opacity = "0";
-
+next.addEventListener('click', nextJob);
+navLink.addEventListener('click', getNav);
+navLink.style.display = 'none';
+navList.style.display = 'none'
 window.onscroll = function () { displayNav() };
 
 function play() {
@@ -37,22 +38,31 @@ function play() {
     setTimeout(() => {
         p1.innerText = 'Bad Dancer'
         p1.style.color = 'pink'
-    
+
     }, 2500)
     setTimeout(() => {
         p1.innerText = 'Web Developer.'
         p1.style.color = 'rgba(203, 114, 206, 1)'
-       
+
     }, 3000)
 }
 
 play()
 
 function displayNav() {
-    if (document.documentElement.scrollTop > 400 && navLink.style.opacity == "0") {
-        navLink.style.opacity = "0.8"
-    } else if (document.documentElement.scrollTop < 400 && navLink.style.opacity == '0.8') {
-        navLink.style.opacity = '0'
+    if (document.documentElement.scrollTop > 400 && navLink.style.display === 'none') {
+        navLink.style.display = "block"
+    } else if (document.documentElement.scrollTop < 400 && navLink.style.display === 'block') {
+        navLink.style.display = 'none'
+        navList.style.display = 'none'
+    }
+}
+
+function getNav() {
+    if (navList.style.display === 'none') {
+        navList.style.display = 'block'
+    } else {
+        navList.style.display = 'none'
     }
 }
 
@@ -74,7 +84,7 @@ function nextJob() {
     if (pgNum === 4) {
         pgNum = 0
         jobTitle.innerText = "Apprentice 2016-Current"
-        jobTextBox.innerText = "During the many treasured hours I have spent at Ping's Music setting up intruments, fixing broken guitar necks (mostly my own), soldering, desoldering, and treating soldering iron burns (mostly my own); I gained powerful problem solving skills, the capacity to think critically, and the ability to take pride in the work I do. What I have learned here has helped solidify my understanding and love for HTML, CSS, and Javascript. In many ways, web development is a lot like the 'guts' of a guitar. Everything is connected, it takes time and patience to set up correctly, and when you finally get it right it is absolutely the best feeling."
+        jobTextBox.innerText = "During the many treasured hours I have spent at Ping's Music setting up intruments, fixing broken guitar necks (mostly my own), soldering, desoldering, and treating soldering iron burns (mostly my own); I gained powerful problem solving skills, the capacity to think critically, and the ability to take pride in the work I do. What I have learned here has helped solidify my understanding and love for logic. In many ways, web development is a lot like the 'guts' of a guitar. Everything is connected, it takes time and patience to set up correctly, and when you finally get it right it is absolutely the best feeling."
     }
 
     if (pgNum === 1) {
